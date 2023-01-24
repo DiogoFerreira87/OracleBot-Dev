@@ -26,7 +26,7 @@ module.exports = {
     let type = embedFooter.text.match(/^(\S+)\s(.*)/).slice(1)[0];
 
     // Get the current date and time
-    let diaHora = new Date(); // Today
+    let diaHora = moment(new Date()).format('DD/MM/YYYY'); // Today
     diaHora = diaHora.toLocaleString();
 
     let createdDate = moment.utc(diaHora, "DD/MM/YYYY HH:mm:ss").toDate();

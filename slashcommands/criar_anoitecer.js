@@ -43,7 +43,7 @@ const run = async (client, interaction) => {
   // Verificar config hora
   let horaFormatada;
   let newHora;
-  let diaHora = new Date(); // Today
+  let diaHora = moment(new Date()).format('DD/MM/YYYY'); // Today
 
   if (capitalizeFirstLetter(hora) == "Agora") {
     if (moment(diaHora, "DD/MM/YYYY").format("DD/MM/YYYY") != moment(dia, "DD/MM/YYYY").format("DD/MM/YYYY")) {
@@ -214,7 +214,7 @@ const run = async (client, interaction) => {
 // https://github.com/discord/discord-api-docs/issues/2438 VERIFICAR ISSO AQUI
 
 module.exports = {
-  name: "criar_anoitecer",
+  name: "abrir_anoitecer",
   description: "Criar uma grade!",
   //perm: "MODERATE_MEMBERS",
   // https://discordjs.guide/interactions/slash-commands.html#option-types // Option-Types
