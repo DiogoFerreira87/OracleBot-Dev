@@ -4,6 +4,10 @@ const { validateDate } = require("../util/functions");
 const { MessageEmbed, MessageComponentInteraction } = require("discord.js");
 const { capitalizeFirstLetter } = require("../util/functions");
 const moment = require("moment");
+//----------------------------------------------
+const database = require("../config/database");
+const Grid = require("../models/Grid");
+//----------------------------------------------
 
 const raids = [
   { name: "A Queda do Rei - MESTRE", value: "QdR Mestre" },
@@ -80,9 +84,15 @@ const run = async (client, interaction) => {
   // Format the date
   let diaFormatado = moment(dia, "DD/MM HH:mm").format("DD/MM");
   let diaSemana = dayOfWeek(moment(dia,"DD/MM/YYYY").format("DD/MM/YYYY"));
-
+  
   // Get interaction member
-  let usuario = interaction.member.nickname;
+  let user;
+  if(interaction.member.nickname == null){
+    user = interaction.member.user.username
+  } else {
+    user = interaction.member.nickname;
+  }
+  let userID = interaction.member.id;
   let avatar = interaction.user.displayAvatarURL();
 
   // Format the description
@@ -90,7 +100,58 @@ const run = async (client, interaction) => {
 
   // Header novo
   const gradeHeader = `**Dia:** ${diaFormatado} (${diaSemana})\n**Hora:** ${horaFormatada}\n**Obs.:** ${descricao}
----------------------------------------------------------`;
+  ----------------------------------------------------`;
+  // --------------------------------------------------------------------------------------//
+  // Connect to the database.
+  const db = new database();
+  db.connect();
+
+  let raidType = "Raid";
+  let grid;
+  let gridID;
+  diaHora = diaHora.toLocaleString();
+
+  if ((await Grid.findOne({ type: raidType })) == null) {
+    // First time inserting to the database.
+    gridID = 1; // First ID
+
+    const newGrid = Grid.create({
+      gridID: gridID,
+      type: raidType,
+      date: moment.utc(dia, "DD/MM/YYYY HH:mm").toDate(),
+      description: descricao,
+      userListID: 1,
+      user: user,
+      userID: userID,
+      starter: true,
+      queue: false,
+      backup: false,
+      quitter: false,
+      createdDate: moment.utc(diaHora, "DD/MM/YYYY HH:mm:ss").toDate(),
+    });
+
+  } else {
+
+    // Get the next grid id to persist
+    grid = (await Grid.find({type: raidType}).sort({_id:-1}).limit(1));
+    gridID = (grid[0].gridID) + 1; // Next ID
+
+    const newGrid = Grid.create({
+      gridID: gridID,
+      type: raidType,
+      date: moment.utc(dia, "DD/MM/YYYY HH:mm").toDate(),
+      description: descricao,
+      userListID: 1,
+      user: user,
+      userID: userID,
+      starter: true,
+      queue: false,
+      backup: false,
+      quitter: false,
+      createdDate: moment.utc(diaHora, "DD/MM/YYYY HH:mm:ss").toDate(),
+    });
+  }
+  // --------------------------------------------------------------------------------------//
 
   // Threads created only on this channel
   let channel = client.channels.cache.get(process.env.GRIDS_CHANNEL);
@@ -157,22 +218,23 @@ const run = async (client, interaction) => {
     .setColor(raidColor)
     .setImage(raidImage)
     .setTitle(
-      "\n---------------------------------------------------\n" + raidTitle + "\n---------------------------------------------------"
+      "\n---------------------------------------------\n" + "#"+ gridID + " - " + raidTitle + "\n---------------------------------------------"
     )
     //.setURL('https://discord.js.org/')
     //.setAuthor({ name: 'Raid Oracles'});//, iconURL: 'https://i.imgur.com/GX7G6BM.png'})//, url: 'https://discord.js.org' })
-    .setAuthor({name: `${usuario}`,iconURL: `${avatar}`})
+    .setAuthor({name: `${user}`,iconURL: `${avatar}`})
     .setDescription(gradeHeader)
     .setThumbnail("https://live.staticflickr.com/65535/52327872553_b4a7a6d414_o.png")
     .addFields(
-      { name: "🎮 Jogadores (0/6)", value: "Nenhum jogador no momento..." },
+      { name: "🎮 Jogadores (1/6)", value: `<@${userID}>` },
       { name: "👥 Reservas (0)", value: "Nenhum" }
     )
     .setTimestamp()
     .setFooter({ text: "Raid - Reaja à mensagem para entrar na lista." }); //, iconURL: 'https://i.imgur.com/GX7G6BM.png' });
 
   // React to the message
-  await thread.send({ embeds: [exampleEmbed] }).then((embedMessage) => {
+  // Orales role
+  thread.send({content: "<@&965910989885296680>", embeds: [exampleEmbed] }).then((embedMessage) => {
     embedMessage.react("☑️"), embedMessage.react("👥");
   });
 

@@ -4,6 +4,10 @@ const { validateDate } = require("../util/functions");
 const { MessageEmbed, MessageComponentInteraction } = require("discord.js");
 const { capitalizeFirstLetter } = require("../util/functions");
 const moment = require("moment");
+//----------------------------------------------
+const database = require("../config/database");
+const Grid = require("../models/Grid");
+//----------------------------------------------
 
 const opcoes = [
   { name: "Destiny", value: "Destiny" },
@@ -25,7 +29,10 @@ const run = async (client, interaction) => {
   if (validateDate(dia) == false) { // If it is not a date in the format DD/MM or DD/MM/YYYY
     dia = capitalizeFirstLetter(dia); // Verifi if it is "Hoje"
     if (dia != "Hoje") {
-      return await interaction.reply({content:"❌ Erro: **Formato de data inválido** - Por favor digite **'Hoje'** ou uma data no formato (**dd/mm** ou **dd/mm/aaaa**)", ephemeral: true });
+      return await interaction.reply({
+        content:
+          "❌ Erro: **Formato de data inválido** - Por favor digite **'Hoje'** ou uma data no formato (**dd/mm** ou **dd/mm/aaaa**)",
+        ephemeral: true });
     } else{
       dia = new Date(); // Today
       dia = moment(dia,"DD/MM/YYYY").format("DD/MM/YYYY") + " " + hora;
@@ -79,7 +86,13 @@ const run = async (client, interaction) => {
   let diaSemana = dayOfWeek(moment(dia,"DD/MM/YYYY").format("DD/MM/YYYY"));
 
   // Get interaction member
-  let usuario = interaction.member.nickname;
+  let user;
+  if(interaction.member.nickname == null){
+    user = interaction.member.user.username
+  } else {
+    user = interaction.member.nickname;
+  }
+  let userID = interaction.member.id;
   let avatar = interaction.user.displayAvatarURL();
 
   // Format the description
@@ -87,7 +100,58 @@ const run = async (client, interaction) => {
 
   // Header novo
   const gradeHeader = `**Dia:** ${diaFormatado} (${diaSemana})\n**Hora:** ${horaFormatada}\n**Obs.:** ${descricao}
---------------------------------------------------------`;
+  ----------------------------------------------------`;
+  // --------------------------------------------------------------------------------------//
+  // Connect to the database.
+  const db = new database();
+  db.connect();
+
+  let othersType = "Outros";
+  let grid;
+  let gridID;
+  diaHora = diaHora.toLocaleString();
+
+  if ((await Grid.findOne({ type: othersType })) == null) {
+    // First time inserting to the database.
+    gridID = 1; // First ID
+
+    const newGrid = Grid.create({
+      gridID: gridID,
+      type: othersType,
+      date: moment.utc(dia, "DD/MM/YYYY HH:mm").toDate(),
+      description: descricao,
+      userListID: 1,
+      user: user,
+      userID: userID,
+      starter: true,
+      queue: false,
+      backup: false,
+      quitter: false,
+      createdDate: moment.utc(diaHora, "DD/MM/YYYY HH:mm:ss").toDate(),
+    });
+
+  } else {
+
+    // Get the next grid id to persist
+    grid = (await Grid.find({type: othersType}).sort({_id:-1}).limit(1));
+    gridID = (grid[0].gridID) + 1; // Next ID
+
+    const newGrid = Grid.create({
+      gridID: gridID,
+      type: othersType,
+      date: moment.utc(dia, "DD/MM/YYYY HH:mm").toDate(),
+      description: descricao,
+      userListID: 1,
+      user: user,
+      userID: userID,
+      starter: true,
+      queue: false,
+      backup: false,
+      quitter: false,
+      createdDate: moment.utc(diaHora, "DD/MM/YYYY HH:mm:ss").toDate(),
+    });
+  }
+  // --------------------------------------------------------------------------------------//
 
   // Threads created only on this channel
   let channel = client.channels.cache.get(process.env.GRIDS_CHANNEL);
@@ -124,22 +188,23 @@ const run = async (client, interaction) => {
     .setColor(otherColor)
     .setImage(otherImage)
     .setTitle(
-      "\n------------------------------------------------\n" + otherTitle + "\n------------------------------------------------"
+      "\n---------------------------------------------\n" + "#"+ gridID + " - " + otherTitle + "\n---------------------------------------------"
     )
     //.setURL('https://discord.js.org/')
     //.setAuthor({ name: 'other Oracles'});//, iconURL: 'https://i.imgur.com/GX7G6BM.png'})//, url: 'https://discord.js.org' })
-    .setAuthor({name: `${usuario}`,iconURL: `${avatar}`})
+    .setAuthor({name: `${user}`,iconURL: `${avatar}`})
     .setDescription(gradeHeader)
     .setThumbnail(otherThumb)
     .addFields(
-      { name: `🎮 Jogadores (0/${jogadores})`, value: "Nenhum jogador no momento..." },
+      { name: `🎮 Jogadores (1/${global.Jogadores})`, value: `<@${userID}>` },
       { name: "👥 Reservas (0)", value: "Nenhum" }
     )
     .setTimestamp()
     .setFooter({ text: "Outros - Reaja à mensagem para entrar na lista." }); //, iconURL: 'https://i.imgur.com/GX7G6BM.png' });
 
   // React to the message
-  thread.send({ embeds: [exampleEmbed] }).then((embedMessage) => {
+  // Orales role
+  thread.send({content: "<@&965910989885296680>", embeds: [exampleEmbed] }).then((embedMessage) => {
     embedMessage.react("☑️"), embedMessage.react("👥");
   });
 

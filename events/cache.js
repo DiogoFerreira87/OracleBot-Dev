@@ -29,7 +29,9 @@ module.exports = {
     // Get the messages
     let messagesArray = [];
     messagesArray = channel.messages.cache.filter(m => m.author.id === process.env.BOT_ID)
-        
+    
+    let users = guild.members.fetch().then((members) => {});
+
     console.log("Cache, funcionando.");
   },
 };

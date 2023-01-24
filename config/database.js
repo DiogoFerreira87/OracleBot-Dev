@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 require("dotenv").config();
+mongoose.set('strictQuery', false);
 
 class database {
   constructor() {
@@ -7,7 +8,7 @@ class database {
   }
 
   connect() {
-    console.log("Connecting to database...");
+    //console.log("Connecting to database...");
 
     mongoose
       .connect(process.env.ORACLESDB, {
@@ -16,7 +17,7 @@ class database {
         keepAlive: true,
       })
       .then(() => {
-        console.log("Connected to database");
+        //console.log("Connected to database");
         this.connection = mongoose.connection;
       })
       .catch((err) => {

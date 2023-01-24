@@ -31,7 +31,7 @@ const run = async (client, interaction) => {
         content:
           "❌ Erro: **Formato de data inválido** - Por favor digite **'Hoje'** ou uma data no formato (**dd/mm** ou **dd/mm/aaaa**)",
         ephemeral: true,
-      });
+      }); 
     } else {
       dia = new Date(); // Today
       dia = moment(dia, "DD/MM/YYYY").format("DD/MM/YYYY") + " " + hora;
@@ -94,9 +94,9 @@ const run = async (client, interaction) => {
 
   // Header novo
   const gradeHeader = `**Dia:** ${diaFormatado} (${diaSemana})\n**Hora:** ${horaFormatada}\n**Obs.:** ${descricao}
----------------------------------------------------------`;
+  ----------------------------------------------------`;
 
-// --------------------------------------------------------------------------------------//
+  // --------------------------------------------------------------------------------------//
   // Connect to the database.
   const db = new database();
   db.connect();
@@ -183,7 +183,7 @@ const run = async (client, interaction) => {
     .setColor(nightfallColor)
     .setImage(nightfallImage)
     .setTitle(
-      "\n---------------------------------------------------\n" + "#"+ gridID + " - " + nightfallTitle + "\n---------------------------------------------------"
+      "\n---------------------------------------------\n" + "#"+ gridID + " - " + nightfallTitle + "\n---------------------------------------------"
     )
     //.setURL('https://discord.js.org/')
     //.setAuthor({ name: 'nightfall Oracles'});//, iconURL: 'https://i.imgur.com/GX7G6BM.png'})//, url: 'https://discord.js.org' })
@@ -207,7 +207,6 @@ const run = async (client, interaction) => {
     content: "Grade criada com sucesso!!",
     ephemeral: true,
   });
-
 };
 
 // https://github.com/discord/discord-api-docs/issues/2438 VERIFICAR ISSO AQUI
