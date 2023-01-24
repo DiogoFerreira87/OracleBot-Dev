@@ -70,7 +70,7 @@ module.exports = {
             return await reaction.message.reply({
               content:
                 `❌ **Erro:** **<@${user.id}>, não é possível sair da grade que você mesmo criou.**
-                    Caso queira cancelar a grade, marque abaixo algum <@&965910989885296680>.`
+                    Caso queira cancelar a grade, marque abaixo algum <@&643576108347818026>.`
             });
 
           } else { // If there are more people already in the list, just remove bot's reaction and send the message
@@ -83,7 +83,7 @@ module.exports = {
               return await reaction.message.reply({
                 content:
                   `❌ **Erro:** **<@${user.id}>, não é possível sair da grade que você mesmo criou.**
-                      Caso queira cancelar a grade, marque abaixo algum <@&965910989885296680>.`
+                      Caso queira cancelar a grade, marque abaixo algum <@&643576108347818026>.`
               });
             
             } else { // 
@@ -133,14 +133,8 @@ module.exports = {
         }
 
       }
-
-
-
-
       //----------------------------------------------------------------------------------------------------------------
 
-
-      
       //----------------------------------------------------------------------------------------------------------------
       // Starter List
       //----------------------------------------------------------------------------------------------------------------

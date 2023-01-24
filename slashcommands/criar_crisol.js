@@ -232,7 +232,7 @@ const run = async (client, interaction) => {
 
   // React to the message
   // Orales role
-  thread.send({content: "<@&965910989885296680>", embeds: [exampleEmbed] }).then((embedMessage) => {
+  thread.send({content: "<@&961267518775918662>", embeds: [exampleEmbed] }).then((embedMessage) => {
     embedMessage.react("☑️"), embedMessage.react("👥");
   });
 
