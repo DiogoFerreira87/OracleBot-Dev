@@ -114,7 +114,7 @@ module.exports = {
               queue: true,
               backup: false,
               quitter: false,
-              createdDate: moment.utc(diaHora, "DD/MM/YYYY HH:mm:ss").toDate(),
+              createdDate: createdDate,
             });
 
             // Save on DB to be able to search the new value.
@@ -176,7 +176,7 @@ module.exports = {
                 queue: true,
                 backup: false,
                 quitter: false,
-                createdDate: moment.utc(diaHora, "DD/MM/YYYY HH:mm:ss").toDate(),
+                createdDate: createdDate,
               });
 
               // Save on DB to be able to search the new value.
@@ -247,7 +247,7 @@ module.exports = {
               queue: false,
               backup: false,
               quitter: false,
-              createdDate: moment.utc(diaHora, "DD/MM/YYYY HH:mm:ss").toDate(),
+              createdDate: createdDate,
             });
 
             // Save on DB to be able to search the new value.
@@ -415,7 +415,7 @@ module.exports = {
                         queue: false,
                         backup: true,
                         quitter: false,
-                        createdDate: moment.utc(diaHora, "DD/MM/YYYY HH:mm:ss").toDate(),
+                        createdDate: createdDate,
                       });
                 // Save on DB to be able to search the new value.
                 (await newGridDB).save;
