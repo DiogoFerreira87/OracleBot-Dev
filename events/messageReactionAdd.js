@@ -147,7 +147,7 @@ module.exports = {
           } else { // Update the user
             
             const query = {gridID: gridID, type: type, userID: user.id};
-            await Grid.findOneAndUpdate(query, {starter: false, queue: true, quitter: false, backup: false, userListID: userlistID, updatedDate: moment.utc(diaHora, "DD/MM/YYYY HH:mm:ss").toDate()}, {new: true})
+            await Grid.findOneAndUpdate(query, {starter: false, queue: true, quitter: false, backup: false, userListID: userlistID, updatedDate: createdDate}, {new: true})
             
             // Remove the User's reaction (In case of reaction)
             await reaction.message.reactions.resolve("👥").users.remove(user.id);
@@ -185,7 +185,7 @@ module.exports = {
             } else {  // If the user is already in the db, update him.
               const query = {gridID: gridID, type: type, userID: user.id};
               // Update user
-              await Grid.findOneAndUpdate(query, {starter: false, queue: true, quitter: false, backup: false, userListID: userlistID, updatedDate: moment.utc(diaHora, "DD/MM/YYYY HH:mm:ss").toDate()}, {new: true})
+              await Grid.findOneAndUpdate(query, {starter: false, queue: true, quitter: false, backup: false, userListID: userlistID, updatedDate: createdDate}, {new: true})
   
               // Remove the User's reaction (In case of reaction)
               await reaction.message.reactions.resolve("👥").users.remove(user.id);
@@ -258,7 +258,7 @@ module.exports = {
           else { 
             const query = {gridID: gridID, type: type, userID: user.id};
             // Update user
-            await Grid.findOneAndUpdate(query, {starter: true, queue: false, quitter: false, backup: false, userListID: userlistID, updatedDate: moment.utc(diaHora, "DD/MM/YYYY HH:mm:ss").toDate()}, {new: true})
+            await Grid.findOneAndUpdate(query, {starter: true, queue: false, quitter: false, backup: false, userListID: userlistID, updatedDate: createdDate}, {new: true})
 
             // Remove the User's reaction (In case of reaction)
             await reaction.message.reactions.resolve("👥").users.remove(user.id);
@@ -424,7 +424,7 @@ module.exports = {
                 else {
                   const query = {gridID: gridID, type: type, userID: user.id};
                   // Update the user
-                  await Grid.findOneAndUpdate(query, {starter: false, queue: false, quitter: false, backup: true, userListID: userlistID, updatedDate: moment.utc(diaHora, "DD/MM/YYYY HH:mm:ss").toDate()}, {new: true})
+                  await Grid.findOneAndUpdate(query, {starter: false, queue: false, quitter: false, backup: true, userListID: userlistID, updatedDate: createdDate}, {new: true})
 
                   // Remove the User's reaction (In case of reaction)
                   await reaction.message.reactions.resolve("☑️").users.remove(user.id);

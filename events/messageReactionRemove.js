@@ -92,7 +92,7 @@ module.exports = {
 
               // Update the user as "quitter" in DB.
               const query = {gridID: gridID, type: type, userID: user.id};
-              await Grid.findOneAndUpdate(query, {starter: false, queue: false, quitter: true, backup: false, userListID: 0, updatedDate: moment.utc(diaHora, "DD/MM/YYYY HH:mm:ss").toDate()}, {new: true})
+              await Grid.findOneAndUpdate(query, {starter: false, queue: false, quitter: true, backup: false, userListID: 0, updatedDate: createdDate}, {new: true})
             }
           }
         }
@@ -121,7 +121,7 @@ module.exports = {
 
           // Update the user:
           const query = {gridID: gridID, type: type, userID: userID};
-          await Grid.findOneAndUpdate(query, {starter: true, queue: false, quitter: false, backup: false, userListID: userlistID, updatedDate: moment.utc(diaHora, "DD/MM/YYYY HH:mm:ss").toDate()}, {new: true})
+          await Grid.findOneAndUpdate(query, {starter: true, queue: false, quitter: false, backup: false, userListID: userlistID, updatedDate: createdDate}, {new: true})
 
           // Send a message to the user that is now in the starter list
           // Send DM
@@ -264,7 +264,7 @@ module.exports = {
 
           const query = {gridID: gridID, type: type, userID: user.id};
           // Update the user
-          await Grid.findOneAndUpdate(query, {starter: false, queue: false, quitter: true, backup: false, userListID: 0, updatedDate: moment.utc(diaHora, "DD/MM/YYYY HH:mm:ss").toDate()}, {new: true})
+          await Grid.findOneAndUpdate(query, {starter: false, queue: false, quitter: true, backup: false, userListID: 0, updatedDate: createdDate}, {new: true})
 
         } 
           //----------------------------------------------------------------------------------------------------------------
