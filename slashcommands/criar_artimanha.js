@@ -209,7 +209,7 @@ module.exports = {
     },
     {
       name: "descricao",
-      description: "Descrição da atividade da grade. Ex.: Triunfo 'Proteja o corredor', Resetar o rank, Fazer contratos...",
+      description: "Descrição da atividade da grade. Ex.: Triunfo 'Proteja o corredor', Resetar o rank...",
       type: "STRING",
       required: true,
     },
