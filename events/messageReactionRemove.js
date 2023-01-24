@@ -29,6 +29,8 @@ module.exports = {
     let diaHora = new Date(); // Today
     diaHora = diaHora.toLocaleString();
 
+    let createdDate = moment.utc(diaHora, "DD/MM/YYYY HH:mm:ss").toDate();
+    
     // Get the number of players
     let players;
     if(numberOfPlayers(embedFooter.text) == null){

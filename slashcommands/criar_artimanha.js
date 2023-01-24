@@ -97,6 +97,8 @@ const run = async (client, interaction) => {
   const db = new database();
   db.connect();
 
+  let createdDate = moment.utc(diaHora, "DD/MM/YYYY HH:mm:ss").toDate();
+
   let gambitType = "Artimanha";
   let grid;
   let gridID;
@@ -118,7 +120,7 @@ const run = async (client, interaction) => {
       queue: false,
       backup: false,
       quitter: false,
-      createdDate: moment.utc(diaHora, "DD/MM/YYYY HH:mm:ss").toDate(),
+      createdDate: createdDate,
     });
 
   } else {
@@ -139,7 +141,7 @@ const run = async (client, interaction) => {
       queue: false,
       backup: false,
       quitter: false,
-      createdDate: moment.utc(diaHora, "DD/MM/YYYY HH:mm:ss").toDate(),
+      createdDate: createdDate,
     });
   }
   // --------------------------------------------------------------------------------------//
@@ -190,7 +192,7 @@ const run = async (client, interaction) => {
 };
 // https://github.com/discord/discord-api-docs/issues/2438 VERIFICAR ISSO AQUI
 module.exports = {
-  name: "abrir_artimanha",
+  name: "criar_artimanha",
   description: "Criar uma grade!",
   //perm: "MODERATE_MEMBERS",
   // https://discordjs.guide/interactions/slash-commands.html#option-types // Option-Types
