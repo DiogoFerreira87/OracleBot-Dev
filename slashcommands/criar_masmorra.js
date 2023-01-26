@@ -136,7 +136,7 @@ const run = async (client, interaction) => {
   } else {
 
     // Get the next grid id to persist
-    grid = (await Grid.find({type: dungeonType}).sort({_id:-1}).limit(1));
+    grid = (await Grid.find({type: dungeonType}).sort({gridID: -1}).limit(1));
     gridID = (grid[0].gridID) + 1; // Next ID
 
     const newGrid = Grid.create({
