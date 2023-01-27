@@ -38,6 +38,10 @@ module.exports = {
       players = numberOfPlayers(embedFooter.text);
     }
 
+    // Get the member reaction's nickname.
+    const member = await reaction.message.guild.members.fetch(user.id)
+    let userNickname = member.nickname
+
     // Getting embed fields
     let fields = currentEmbed.fields.length;
 
@@ -108,7 +112,7 @@ module.exports = {
               date: grid[0].date,
               description: grid[0].description,
               userListID: grid[grid.length - 1].userListID + 1, // Criar user list aqui. Pegar o ultimo numero + 1.
-              user: user.nickname,
+              user: userNickname,
               userID: user.id,
               starter: false,
               queue: true,
@@ -170,7 +174,7 @@ module.exports = {
                 date: grid[0].date,
                 description: grid[0].description,
                 userListID: grid[grid.length - 1].userListID + 1, // Criar user list aqui. Pegar o ultimo numero + 1.
-                user: user.nickname,
+                user: userNickname,
                 userID: user.id,
                 starter: false,
                 queue: true,
@@ -241,7 +245,7 @@ module.exports = {
               date: grid[0].date,
               description: grid[0].description,
               userListID: grid[grid.length - 1].userListID + 1, // Criar user list aqui. Pegar o ultimo numero + 1.
-              user: user.nickname,
+              user: userNickname,
               userID: user.id,
               starter: true,
               queue: false,
@@ -409,7 +413,7 @@ module.exports = {
                         date: grid[0].date,
                         description: grid[0].description,
                         userListID: grid[grid.length - 1].userListID + 1, // Criar user list aqui. Pegar o ultimo numero + 1.
-                        user: user.nickname,
+                        user: userNickname,
                         userID: user.id,
                         starter: false,
                         queue: false,
