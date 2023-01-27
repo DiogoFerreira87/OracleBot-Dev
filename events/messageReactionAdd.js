@@ -108,7 +108,7 @@ module.exports = {
               date: grid[0].date,
               description: grid[0].description,
               userListID: grid[grid.length - 1].userListID + 1, // Criar user list aqui. Pegar o ultimo numero + 1.
-              user: user.username,
+              user: user.nickname,
               userID: user.id,
               starter: false,
               queue: true,
@@ -170,7 +170,7 @@ module.exports = {
                 date: grid[0].date,
                 description: grid[0].description,
                 userListID: grid[grid.length - 1].userListID + 1, // Criar user list aqui. Pegar o ultimo numero + 1.
-                user: user.username,
+                user: user.nickname,
                 userID: user.id,
                 starter: false,
                 queue: true,
@@ -241,7 +241,7 @@ module.exports = {
               date: grid[0].date,
               description: grid[0].description,
               userListID: grid[grid.length - 1].userListID + 1, // Criar user list aqui. Pegar o ultimo numero + 1.
-              user: user.username,
+              user: user.nickname,
               userID: user.id,
               starter: true,
               queue: false,
@@ -409,7 +409,7 @@ module.exports = {
                         date: grid[0].date,
                         description: grid[0].description,
                         userListID: grid[grid.length - 1].userListID + 1, // Criar user list aqui. Pegar o ultimo numero + 1.
-                        user: user.username,
+                        user: user.nickname,
                         userID: user.id,
                         starter: false,
                         queue: false,
