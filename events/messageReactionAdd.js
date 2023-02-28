@@ -11,44 +11,44 @@ module.exports = {
   name: "messageReactionAdd",
   run: async (bot, reaction, user) => {
     
-    // Connect to the database
-    const db = new database();
-    db.connect();
-
-    // Get the current Embed
-    let currentEmbed = reaction.message.embeds[0];
-    let embedTitle = currentEmbed.title;
-    let gridID = parseInt(embedTitle.substring(embedTitle.indexOf("#") + 1).match(/^(\S+)\s(.*)/).slice(1)[0]);
-
-    // Get the Grid Type
-    let embedFooter = currentEmbed.footer;
-    let type = embedFooter.text.match(/^(\S+)\s(.*)/).slice(1)[0];
-
-    // Get the current date and time
-    let diaHora = moment(new Date()).format('DD/MM/YYYY'); // Today
-    diaHora = diaHora.toLocaleString();
-
-    let createdDate = moment.utc(diaHora, "DD/MM/YYYY HH:mm:ss").toDate();
-    
-    // Get the number of players
-    let players;
-    if(numberOfPlayers(embedFooter.text) == null){
-      players = global.Jogadores;
-    } else {
-      players = numberOfPlayers(embedFooter.text);
-    }
-
-    // Get the member reaction's nickname.
-    const member = await reaction.message.guild.members.fetch(user.id)
-    let userNickname = member.nickname
-
-    // Getting embed fields
-    let fields = currentEmbed.fields.length;
-
     // Must be the correct emoji:☑️, The message author must be the BOT and the reaction can't be by the BOT yet
     if (reaction.emoji.name === "☑️" && reaction.message.author.id === process.env.BOT_ID && user.id != process.env.BOT_ID) {
       // -------------------------------------------------------------------------------------------------------------------------
       // Get parameters
+      // -------------------------------------------------------------------------------------------------------------------------
+      // Connect to the database
+      const db = new database();
+      db.connect();
+
+      // Get the current Embed
+      let currentEmbed = reaction.message.embeds[0];
+      let embedTitle = currentEmbed.title;
+      let gridID = parseInt(embedTitle.substring(embedTitle.indexOf("#") + 1).match(/^(\S+)\s(.*)/).slice(1)[0]);
+
+      // Get the Grid Type
+      let embedFooter = currentEmbed.footer;
+      let type = embedFooter.text.match(/^(\S+)\s(.*)/).slice(1)[0];
+
+      // Get the current date and time
+      let diaHora = moment(new Date()).format('DD/MM/YYYY'); // Today
+      diaHora = diaHora.toLocaleString();
+
+      let createdDate = moment.utc(diaHora, "DD/MM/YYYY HH:mm:ss").toDate();
+      
+      // Get the number of players
+      let players;
+      if(numberOfPlayers(embedFooter.text) == null){
+        players = global.Jogadores;
+      } else {
+        players = numberOfPlayers(embedFooter.text);
+      }
+
+      // Get the member reaction's nickname.
+      const member = await reaction.message.guild.members.fetch(user.id)
+      let userNickname = member.nickname
+
+      // Getting embed fields
+      let fields = currentEmbed.fields.length;
       // -------------------------------------------------------------------------------------------------------------------------
 
       // Get the Players/Queue/Backup lists
@@ -387,7 +387,44 @@ module.exports = {
         // Reaction: Reservas 👥
         // Must be the correct emoji:👥, The message author must be the BOT and the reaction can't be by the BOT yet
         if (reaction.emoji.name === "👥" && reaction.message.author.id === process.env.BOT_ID && user.id != process.env.BOT_ID) {
+          // -------------------------------------------------------------------------------------------------------------------------
+          // Get parameters
+          // -------------------------------------------------------------------------------------------------------------------------
+          // Connect to the database
+          const db = new database();
+          db.connect();
 
+          // Get the current Embed
+          let currentEmbed = reaction.message.embeds[0];
+          let embedTitle = currentEmbed.title;
+          let gridID = parseInt(embedTitle.substring(embedTitle.indexOf("#") + 1).match(/^(\S+)\s(.*)/).slice(1)[0]);
+
+          // Get the Grid Type
+          let embedFooter = currentEmbed.footer;
+          let type = embedFooter.text.match(/^(\S+)\s(.*)/).slice(1)[0];
+
+          // Get the current date and time
+          let diaHora = moment(new Date()).format('DD/MM/YYYY'); // Today
+          diaHora = diaHora.toLocaleString();
+
+          let createdDate = moment.utc(diaHora, "DD/MM/YYYY HH:mm:ss").toDate();
+          
+          // Get the number of players
+          let players;
+          if(numberOfPlayers(embedFooter.text) == null){
+            players = global.Jogadores;
+          } else {
+            players = numberOfPlayers(embedFooter.text);
+          }
+
+          // Get the member reaction's nickname.
+          const member = await reaction.message.guild.members.fetch(user.id)
+          let userNickname = member.nickname
+
+          // Getting embed fields
+          let fields = currentEmbed.fields.length;
+          // -------------------------------------------------------------------------------------------------------------------------
+          
           // Get the Players lists
           var grid = await Grid.find({ gridID: gridID, type: type}).sort({ userListID: 1 });
           
