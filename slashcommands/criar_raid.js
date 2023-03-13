@@ -10,6 +10,7 @@ const Grid = require("../models/Grid");
 //----------------------------------------------
 
 const raids = [
+  { name: "Raiz dos Pesadelos", value: "RdP" },
   { name: "A Queda do Rei - MESTRE", value: "QdR Mestre" },
   { name: "A Queda do Rei", value: "Queda do Rei" },
   { name: "Voto do Discípulo - MESTRE", value: "VoD Mestre" },
@@ -74,7 +75,7 @@ const run = async (client, interaction) => {
 
       // Thread formatted hour
       if (hora.includes(":00")) {
-        newHora = `${hora.substring(0, 2)}h`;
+        newHora = `${hora.replace(":", "h").substring(0, hora.length -2)}`;
       } else {
         newHora = `${hora.replace(":", "h")}`;
       }
@@ -167,6 +168,11 @@ const run = async (client, interaction) => {
   let raidImage;
   let raidColor;
   switch (raid) {
+    case "RdP":
+      raidImage = "https://live.staticflickr.com/65535/52717699255_bc4c8bd3ba_o.png";
+      raidColor = "#bf0096";
+      raidTitle = "Raiz dos Pesadelos";
+      break;
     case "QdR Mestre":
       raidImage = "https://live.staticflickr.com/65535/52371856684_f6421d563f_o.png";
       raidColor = "#6d00ba";

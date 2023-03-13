@@ -64,7 +64,8 @@ const run = async (client, interaction) => {
 
       // Thread formatted hour
       if (hora.includes(":00")) {
-        newHora = `${hora.substring(0, 2)}h`;
+        newHora = `${hora.replace(":", "h").substring(0, hora.length -2)}`;
+
       } else {
         newHora = `${hora.replace(":", "h")}`;
       }

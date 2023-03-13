@@ -68,7 +68,8 @@ const run = async (client, interaction) => {
 
       // Thread formatted hour
       if (hora.includes(":00")) {
-        newHora = `${hora.substring(0, 2)}h`;
+        newHora = `${hora.replace(":", "h").substring(0, hora.length -2)}`;
+
       } else {
         newHora = `${hora.replace(":", "h")}`;
       }
@@ -200,8 +201,9 @@ const run = async (client, interaction) => {
     .setFooter({ text: "Anoitecer - Reaja à mensagem para entrar na lista." }); //, iconURL: 'https://i.imgur.com/GX7G6BM.png' });
 
   // React to the message
-  // Orales role
-  thread.send({content: "<@&961267518775918662>", embeds: [exampleEmbed] }).then((embedMessage) => {
+  // Orales role 961267518775918662
+  // Test Role 965910989885296680
+  thread.send({content: "<@&965910989885296680>", embeds: [exampleEmbed] }).then((embedMessage) => {
     embedMessage.react("☑️"), embedMessage.react("👥");
   });
 

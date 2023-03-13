@@ -20,9 +20,9 @@ function dayOfWeek(day) {
   } else {
     let dayOfWeekNumber = moment(day,"DD/MM/YYYY").isoWeekday();
     let nameOfDay;
-
+   
     switch (dayOfWeekNumber) {
-      case 0:
+      case 7:
         nameOfDay = "Domingo";
         break;
       case 1:
