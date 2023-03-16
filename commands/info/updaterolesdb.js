@@ -283,7 +283,7 @@ module.exports = {
                 }
                 
                 }
-            console.log("Atualização concluída.");
+            console.log("Base de dados atualizada.");
             embed = embed
                     .setDescription(`✅ Base de dados atualizada com sucesso!`)
                     .setColor(color);

@@ -3,7 +3,7 @@ const { validateTime } = require("../util/functions");
 const { validateDate } = require("../util/functions");
 const { MessageEmbed, MessageComponentInteraction, CommandInteractionOptionResolver } = require("discord.js");
 const { capitalizeFirstLetter } = require("../util/functions");
-const moment = require("moment");
+const moment = require('moment-timezone');
 //----------------------------------------------
 const database = require("../config/database");
 const Grid = require("../models/Grid");
@@ -33,17 +33,23 @@ const run = async (client, interaction) => {
         ephemeral: true,
       }); 
     } else {
-      dia = new Date(); // Today
-      dia = moment(dia, "DD/MM/YYYY").format("DD/MM/YYYY") + " " + hora;
+      let testdate = new Date();
+      console.log('Hora do Server: ' + moment(testdate,"DD/MM/YYYY").format("YYYY-MM-DD[T]HH:mm:ss"))
+
+      dia = moment.tz(new Date(),"America/Sao_Paulo").format("YYYY-MM-DD[T]HH:mm:ss");
+      
+      console.log('Hora do BR: ' + dia)
+
+      dia = moment(dia).format("DD/MM/YYYY") + " " + hora;
     }
   } else {
-    dia = moment(dia, "DD/MM/YYYY").format("DD/MM/YYYY") + " " + hora; // If it is all good, format the correct date.
+    dia = moment(dia).format("DD/MM/YYYY") + " " + hora; // If it is all good, format the correct date.
   }
 
   // Verificar config hora
   let horaFormatada;
   let newHora;
-  let diaHora = moment(new Date()).format('DD/MM/YYYY'); // Today
+  let diaHora = moment.tz(new Date(),"America/Sao_Paulo").format('DD/MM/YYYY'); // Today
 
   if (capitalizeFirstLetter(hora) == "Agora") {
     if (moment(diaHora, "DD/MM/YYYY").format("DD/MM/YYYY") != moment(dia, "DD/MM/YYYY").format("DD/MM/YYYY")) {

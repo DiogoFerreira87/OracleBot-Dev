@@ -34,13 +34,12 @@ const run = async (client, interaction) => {
           "❌ Erro: **Formato de data inválido** - Por favor digite **'Hoje'** ou uma data no formato (**dd/mm** ou **dd/mm/aaaa**)",
           ephemeral: true,
     });
-    } else{
-      dia = new Date(); // Today
-      dia = moment(dia,"DD/MM/YYYY").format("DD/MM/YYYY") + " " + hora;
+    } else {
+      dia = moment.tz(new Date(),"America/Sao_Paulo").format("YYYY-MM-DD[T]HH:mm:ss");
+      dia = moment(dia).format("DD/MM/YYYY") + " " + hora;
     }
-  }
-  else{
-    dia = moment(dia,"DD/MM/YYYY").format("DD/MM/YYYY") + " " + hora; // If it is all good, format the correct date.
+  } else {
+    dia = moment(dia).format("DD/MM/YYYY") + " " + hora; // If it is all good, format the correct date.
   }
 
   // Verificar config hora

@@ -132,7 +132,7 @@ function dayOfWeekDesc(dayDesc) {
 
     switch (dayOfWeekNumber) {
       case "Dom":
-        numberOfDay = 0;
+        numberOfDay = 7;
         break;
       case "Seg":
         numberOfDay = 1;

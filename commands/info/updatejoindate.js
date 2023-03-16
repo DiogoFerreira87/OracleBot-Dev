@@ -95,7 +95,7 @@ module.exports = {
                 }
             }
         }
-        console.log("Atualização concluída.");
+        console.log("Novo membro adicionado ao clã.");
         embed = embed
                 .setDescription(`✅ A data de entrada do membro ${args[0]} foi atualizada com sucesso. \nData de entrada no clã: ${args[1]}`)
                 .setColor(greenColor);
