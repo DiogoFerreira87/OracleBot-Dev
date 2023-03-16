@@ -49,7 +49,7 @@ module.exports = {
             if (type.length == 0){
                 embed = embed
                     .setDescription(`❌ Erro: O tipo de grade "${args[0]}" não exite. Por favor digite um tipo correto.`)
-                    .setColor(greenColor);
+                    .setColor(redColor);
                 
                 return message.reply({embeds: [embed]})
 
@@ -57,7 +57,7 @@ module.exports = {
                 if(id == 0){
                     embed = embed
                     .setDescription(`❌ Erro: O tipo de grade "${args[0]}" exite, porém não foi possível encontrar a grade número "${args[1]}". \nPor favor verifique se o número da grade está correto.`)
-                    .setColor(greenColor);
+                    .setColor(redColor);
                 
                     return message.reply({embeds: [embed]})
                 
