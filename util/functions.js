@@ -15,9 +15,9 @@ function dayOfWeek(day) {
   let date = new Date();
   date = moment(date, "YYYY-MM-DD").format("DD/MM/YYYY")
 
-  if (day == date) {
-    return "Hoje";
-  } else {
+  // if (day == date) {
+  //   return "Hoje";
+  // } else {
     let dayOfWeekNumber = moment(day,"DD/MM/YYYY").isoWeekday();
     let nameOfDay;
    
@@ -46,7 +46,7 @@ function dayOfWeek(day) {
     }
 
     return nameOfDay;
-  }
+  // }
 }
 // -------------------------------------- //
 // Function to get the activity number of players
