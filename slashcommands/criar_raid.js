@@ -10,6 +10,7 @@ const Grid = require("../models/Grid");
 //----------------------------------------------
 
 const raids = [
+  { name: "Raiz dos Pesadelos - MESTRE", value: "RdP Mestre" },
   { name: "Raiz dos Pesadelos", value: "RdP" },
   { name: "A Queda do Rei - MESTRE", value: "QdR Mestre" },
   { name: "A Queda do Rei", value: "Queda do Rei" },
@@ -34,12 +35,13 @@ const run = async (client, interaction) => {
     dia = capitalizeFirstLetter(dia); // Verifi if it is "Hoje"
     if (dia != "Hoje") {
       return await interaction.reply({content:"❌ Erro: **Formato de data inválido** - Por favor digite **'Hoje'** ou uma data no formato (**dd/mm** ou **dd/mm/aaaa**)", ephemeral: true });
-    } else {
-      dia = moment.tz(new Date(),"America/Sao_Paulo").format("YYYY-MM-DD[T]HH:mm:ss");
-      dia = moment(dia).format("DD/MM/YYYY") + " " + hora;
+    } else{
+      dia = new Date(); // Today
+      dia = moment(dia,"DD/MM/YYYY").format("DD/MM/YYYY") + " " + hora;
     }
-  } else {
-    dia = moment(dia).format("DD/MM/YYYY") + " " + hora; // If it is all good, format the correct date.
+  }
+  else{
+    dia = moment(dia,"DD/MM/YYYY").format("DD/MM/YYYY") + " " + hora; // If it is all good, format the correct date.
   }
 
   // Verificar config hora
@@ -167,6 +169,11 @@ const run = async (client, interaction) => {
   let raidImage;
   let raidColor;
   switch (raid) {
+    case "RdP Mestre":
+      raidImage = "https://live.staticflickr.com/65535/52773547174_c5a436ced4_o.png";
+      raidColor = "#7c00bf";
+      raidTitle = "Raiz dos Pesadelos - Mestre";
+      break;
     case "RdP":
       raidImage = "https://live.staticflickr.com/65535/52717699255_bc4c8bd3ba_o.png";
       raidColor = "#bf0096";
@@ -241,7 +248,7 @@ const run = async (client, interaction) => {
 
   // React to the message
   // Orales role
-  thread.send({content: "<@&961267518775918662>", embeds: [exampleEmbed] }).then((embedMessage) => {
+  thread.send({content: "<@&961267518775918662> <@&965294430552719442>", embeds: [exampleEmbed] }).then((embedMessage) => {
     embedMessage.react("☑️"), embedMessage.react("👥");
   });
 
