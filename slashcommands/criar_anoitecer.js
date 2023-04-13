@@ -23,27 +23,17 @@ const run = async (client, interaction) => {
   let descricao = interaction.options.getString("descricao");
 
   // Verificar config da data
-  if (validateDate(dia) == false) {
-    // If it is not a date in the format DD/MM or DD/MM/YYYY
+  if (validateDate(dia) == false) { // If it is not a date in the format DD/MM or DD/MM/YYYY
     dia = capitalizeFirstLetter(dia); // Verifi if it is "Hoje"
     if (dia != "Hoje") {
-      return await interaction.reply({
-        content:
-          "❌ Erro: **Formato de data inválido** - Por favor digite **'Hoje'** ou uma data no formato (**dd/mm** ou **dd/mm/aaaa**)",
-        ephemeral: true,
-      }); 
-    } else {
-      let testdate = new Date();
-      console.log('Hora do Server: ' + moment(testdate,"DD/MM/YYYY").format("YYYY-MM-DD[T]HH:mm:ss"))
-
-      dia = moment.tz(new Date(),"America/Sao_Paulo").format("YYYY-MM-DD[T]HH:mm:ss");
-      
-      console.log('Hora do BR: ' + dia)
-
-      dia = moment(dia).format("DD/MM/YYYY") + " " + hora;
+      return await interaction.reply({content:"❌ Erro: **Formato de data inválido** - Por favor digite **'Hoje'** ou uma data no formato (**dd/mm** ou **dd/mm/aaaa**)", ephemeral: true });
+    } else{
+      dia = new Date(); // Today
+      dia = moment(dia,"DD/MM/YYYY").format("DD/MM/YYYY") + " " + hora;
     }
-  } else {
-    dia = moment(dia).format("DD/MM/YYYY") + " " + hora; // If it is all good, format the correct date.
+  }
+  else{
+    dia = moment(dia,"DD/MM/YYYY").format("DD/MM/YYYY") + " " + hora; // If it is all good, format the correct date.
   }
 
   // Verificar config hora
@@ -51,8 +41,10 @@ const run = async (client, interaction) => {
   let newHora;
   let diaHora = moment.tz(new Date(),"America/Sao_Paulo").format('DD/MM/YYYY'); // Today
 
-  if (capitalizeFirstLetter(hora) == "Agora") {
-    if (moment(diaHora, "DD/MM/YYYY").format("DD/MM/YYYY") != moment(dia, "DD/MM/YYYY").format("DD/MM/YYYY")) {
+  if(capitalizeFirstLetter(hora) == "Agora"){
+
+    if(moment(diaHora,"DD/MM/YYYY").format("DD/MM/YYYY") != moment(dia,"DD/MM/YYYY").format("DD/MM/YYYY"))
+    {
       return await interaction.reply({
         content:
           "❌ Erro: **Data e hora inconsistentes** - Não é possível criar uma grade para 'agora' em uma data futura.",
@@ -62,20 +54,21 @@ const run = async (client, interaction) => {
 
     horaFormatada = "Assim que fechar...";
     newHora = "Agora";
-  } else {
+  } else{
+    
     if (validateTime(hora) == false) {
       return await interaction.reply({
         content:
           "❌ Erro: **Formato de hora inválido** - Por favor, digite 'Agora' ou use o formato **hh:mm**. Ex: 15:00, 17:30, 20:45.",
         ephemeral: true,
       });
-    } else {
+    } else{
+
       horaFormatada = moment(dia, "DD/MM HH:mm").format("HH:mm");
 
       // Thread formatted hour
       if (hora.includes(":00")) {
         newHora = `${hora.replace(":", "h").substring(0, hora.length -2)}`;
-
       } else {
         newHora = `${hora.replace(":", "h")}`;
       }
