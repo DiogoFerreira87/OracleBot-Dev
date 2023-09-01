@@ -10,6 +10,7 @@ const Grid = require("../models/Grid");
 //----------------------------------------------
 
 const raids = [
+  { name: "O Fim de Crota", value: "Crota" },
   { name: "Raiz dos Pesadelos - MESTRE", value: "RdP Mestre" },
   { name: "Raiz dos Pesadelos", value: "RdP" },
   { name: "A Queda do Rei - MESTRE", value: "QdR Mestre" },
@@ -169,6 +170,11 @@ const run = async (client, interaction) => {
   let raidImage;
   let raidColor;
   switch (raid) {
+    case "Crota":
+      raidImage = "https://live.staticflickr.com/65535/53157045470_626f3a0a80_o.png";
+      raidColor = "#058038";
+      raidTitle = "O fim de Crota";
+      break;
     case "RdP Mestre":
       raidImage = "https://live.staticflickr.com/65535/52773547174_c5a436ced4_o.png";
       raidColor = "#7c00bf";
