@@ -33,12 +33,13 @@ const run = async (client, interaction) => {
         content:
           "❌ Erro: **Formato de data inválido** - Por favor digite **'Hoje'** ou uma data no formato (**dd/mm** ou **dd/mm/aaaa**)",
         ephemeral: true });
-    } else {
-      dia = moment.tz(new Date(),"America/Sao_Paulo").format("YYYY-MM-DD[T]HH:mm:ss");
-      dia = moment(dia).format("DD/MM/YYYY") + " " + hora;
+    } else{
+      dia = new Date(); // Today
+      dia = moment(dia,"DD/MM/YYYY").format("DD/MM/YYYY") + " " + hora;
     }
-  } else {
-    dia = moment(dia).format("DD/MM/YYYY") + " " + hora; // If it is all good, format the correct date.
+  }
+  else{
+    dia = moment(dia,"DD/MM/YYYY").format("DD/MM/YYYY") + " " + hora; // If it is all good, format the correct date.
   }
 
   // Verificar config hora
@@ -74,7 +75,6 @@ const run = async (client, interaction) => {
       // Thread formatted hour
       if (hora.includes(":00")) {
         newHora = `${hora.replace(":", "h").substring(0, hora.length -2)}`;
-
       } else {
         newHora = `${hora.replace(":", "h")}`;
       }
@@ -171,16 +171,16 @@ const run = async (client, interaction) => {
 
   switch (outros) {
     case "Destiny":
-      otherImage = "https://live.staticflickr.com/65535/52327602331_6f918e8d6a_o.png";
+      otherImage = "https://i.imgur.com/ed0Oz10.png";
       otherColor = "#007bc7";
       otherTitle = "Destiny - Outros";
-      otherThumb = "https://live.staticflickr.com/65535/52327845043_6c2a84a7e8_o.png";
+      otherThumb = "https://i.imgur.com/JAzY2Ff.png";
       break;
     case "Outros":
-      otherImage = "https://live.staticflickr.com/65535/52327602341_e933d461d2_o.png";
+      otherImage = "https://i.imgur.com/29w3y2V.png";
       otherColor = "#c7a200";
       otherTitle = "Outros Jogos";
-      otherThumb = "https://live.staticflickr.com/65535/52327602351_de328df84f_o.png";
+      otherThumb = "https://i.imgur.com/K49iguB.png";
       break;
   }
 
@@ -217,7 +217,7 @@ const run = async (client, interaction) => {
 };
 // https://github.com/discord/discord-api-docs/issues/2438 VERIFICAR ISSO AQUI
 module.exports = {
-  name: "abrir_outros",
+  name: "criar_outros",
   description: "Criar uma grade!",
   //perm: "MODERATE_MEMBERS",
   // https://discordjs.guide/interactions/slash-commands.html#option-types // Option-Types

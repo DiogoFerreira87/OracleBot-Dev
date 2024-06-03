@@ -10,6 +10,9 @@ const Grid = require("../models/Grid");
 //----------------------------------------------
 
 const raids = [
+  //{ name: "NOVA RAID", value: "NOVA RAID" },
+  { name: "Panteão", value: "Panteão" },
+  { name: "O Fim de Crota - MESTRE", value: "Crota Mestre" },
   { name: "O Fim de Crota", value: "Crota" },
   { name: "Raiz dos Pesadelos - MESTRE", value: "RdP Mestre" },
   { name: "Raiz dos Pesadelos", value: "RdP" },
@@ -170,63 +173,78 @@ const run = async (client, interaction) => {
   let raidImage;
   let raidColor;
   switch (raid) {
+    // case "NOVA RAID":
+    //   raidImage = "https://i.imgur.com/viX0Ivl.png";
+    //   raidColor = "#025926";
+    //   raidTitle = "O fim de Crota - Mestre";
+    //   break;
+    case "Panteão":
+      raidImage = "https://i.imgur.com/heUSeVk.png";
+      raidColor = "#590202";
+      raidTitle = "Panteão";
+      break;
+    case "Crota Mestre":
+      raidImage = "https://i.imgur.com/viX0Ivl.png";
+      raidColor = "#025926";
+      raidTitle = "O fim de Crota - Mestre";
+      break;
     case "Crota":
-      raidImage = "https://live.staticflickr.com/65535/53157045470_626f3a0a80_o.png";
-      raidColor = "#058038";
+      raidImage = "https://i.imgur.com/9i9aDlO.png";
+      raidColor = "#0bba54";
       raidTitle = "O fim de Crota";
       break;
     case "RdP Mestre":
-      raidImage = "https://live.staticflickr.com/65535/52773547174_c5a436ced4_o.png";
+      raidImage = "https://i.imgur.com/PQcEtVg.png";
       raidColor = "#7c00bf";
       raidTitle = "Raiz dos Pesadelos - Mestre";
       break;
     case "RdP":
-      raidImage = "https://live.staticflickr.com/65535/52717699255_bc4c8bd3ba_o.png";
+      raidImage = "https://i.imgur.com/nzOzy8u.png";
       raidColor = "#bf0096";
       raidTitle = "Raiz dos Pesadelos";
       break;
     case "QdR Mestre":
-      raidImage = "https://live.staticflickr.com/65535/52371856684_f6421d563f_o.png";
+      raidImage = "https://i.imgur.com/DAiUTGN.png";
       raidColor = "#6d00ba";
       raidTitle = "A Queda do Rei - Mestre";
       break;
     case "Queda do Rei":
-      raidImage = "https://live.staticflickr.com/65535/52326288962_faa44a217b_o.png";
+      raidImage = "https://i.imgur.com/DGIPC8D.png";
       raidColor = "#ff0000";
       raidTitle = "A Queda do Rei";
       break;
     case "VoD Mestre":
-      raidImage = "https://live.staticflickr.com/65535/52327538059_cab0cc6ef3_o.png";
+      raidImage = "https://i.imgur.com/gG62qGQ.png";
       raidColor = "#ff0000";
       raidTitle = "Voto do Discípulo - Mestre";
       break;
     case "VoD":
-      raidImage = "https://live.staticflickr.com/65535/52326288912_3f6266d345_o.png";
+      raidImage = "https://i.imgur.com/vwGog57.png";
       raidColor = "#93ae73";
       raidTitle = "Voto do Discípulo - Normal";
       break;
     case "VoG Mestre":
-      raidImage = "https://live.staticflickr.com/65535/52327488013_4296dc0bdb_o.png";
+      raidImage = "https://i.imgur.com/4uVNqyS.png";
       raidColor = "#d2e5f1";
       raidTitle = "Câmara de Cristal - Mestre";
       break;
     case "VoG":
-      raidImage = "https://live.staticflickr.com/65535/52327243976_5739d0cc0c_o.png";
+      raidImage = "https://i.imgur.com/jKB2yeL.png";
       raidColor = "#d6c31e";
       raidTitle = "Câmara de Cristal - Normal";
       break;
     case "Cripta":
-      raidImage = "https://live.staticflickr.com/65535/52326289047_2bd0b6f39c_o.png";
+      raidImage = "https://i.imgur.com/BcVPYxp.png";
       raidColor = "#b0cddf";
       raidTitle = "Cripta da Pedra Profunda";
       break;
     case "Jardim":
-      raidImage = "https://live.staticflickr.com/65535/52326289017_0b10cb6910_o.png";
+      raidImage = "https://i.imgur.com/0RLUTGg.png";
       raidColor = "#334136";
       raidTitle = "Jardim da Salvação";
       break;
     case "Último Desejo":
-      raidImage = "https://live.staticflickr.com/65535/52327538104_246571123e_o.png";
+      raidImage = "https://i.imgur.com/g7CkEu0.png";
       raidColor = "#4b8e83";
       raidTitle = "Último Desejo";
       break;
@@ -244,7 +262,7 @@ const run = async (client, interaction) => {
     //.setAuthor({ name: 'Raid Oracles'});//, iconURL: 'https://i.imgur.com/GX7G6BM.png'})//, url: 'https://discord.js.org' })
     .setAuthor({name: `${user}`,iconURL: `${avatar}`})
     .setDescription(gradeHeader)
-    .setThumbnail("https://live.staticflickr.com/65535/52327872553_b4a7a6d414_o.png")
+    .setThumbnail("https://i.imgur.com/GX7G6BM.png?2")
     .addFields(
       { name: "🎮 Jogadores (1/6)", value: `<@${userID}>` },
       { name: "👥 Reservas (0)", value: "Nenhum" }
@@ -254,7 +272,7 @@ const run = async (client, interaction) => {
 
   // React to the message
   // Orales role
-  thread.send({content: "<@&961267518775918662> <@&965294430552719442>", embeds: [exampleEmbed] }).then((embedMessage) => {
+  thread.send({content: "<@&961267518775918662>", embeds: [exampleEmbed] }).then((embedMessage) => {
     embedMessage.react("☑️"), embedMessage.react("👥");
   });
 
@@ -265,7 +283,7 @@ const run = async (client, interaction) => {
 };
 // https://github.com/discord/discord-api-docs/issues/2438 VERIFICAR ISSO AQUI
 module.exports = {
-  name: "abrir_raid",
+  name: "criar_raid",
   description: "Criar uma grade!",
   //perm: "MODERATE_MEMBERS",
   // https://discordjs.guide/interactions/slash-commands.html#option-types // Option-Types

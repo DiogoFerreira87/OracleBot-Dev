@@ -34,12 +34,13 @@ const run = async (client, interaction) => {
           "❌ Erro: **Formato de data inválido** - Por favor digite **'Hoje'** ou uma data no formato (**dd/mm** ou **dd/mm/aaaa**)",
         ephemeral: true
       });
-    } else {
-      dia = moment.tz(new Date(),"America/Sao_Paulo").format("YYYY-MM-DD[T]HH:mm:ss");
-      dia = moment(dia).format("DD/MM/YYYY") + " " + hora;
+    } else{
+      dia = new Date(); // Today
+      dia = moment(dia,"DD/MM/YYYY").format("DD/MM/YYYY") + " " + hora;
     }
-  } else {
-    dia = moment(dia).format("DD/MM/YYYY") + " " + hora; // If it is all good, format the correct date.
+  }
+  else{
+    dia = moment(dia,"DD/MM/YYYY").format("DD/MM/YYYY") + " " + hora; // If it is all good, format the correct date.
   }
 
   // Verificar config hora
@@ -73,7 +74,6 @@ const run = async (client, interaction) => {
       // Thread formatted hour
       if (hora.includes(":00")) {
         newHora = `${hora.replace(":", "h").substring(0, hora.length -2)}`;
-
       } else {
         newHora = `${hora.replace(":", "h")}`;
       }
@@ -117,42 +117,42 @@ const run = async (client, interaction) => {
   let players;
   switch (crucible) {
     case "Controle":
-      crucibleImage = "https://live.staticflickr.com/65535/52327844443_6968ac2cbb_o.png";
+      crucibleImage = "https://i.imgur.com/iKTkA7z.png";
       crucibleColor = "#ff0000";
       crucibleTitle = "Controle";
-      crucibleThumbnail = "https://live.staticflickr.com/65535/52327844398_680ac5d28e_o.png";
+      crucibleThumbnail = "https://i.imgur.com/EiiEyq7.png";
       crucibleFooter = "Controle"
       players = numberOfPlayers(crucibleFooter)
       break;
     case "Competitivo":
-      crucibleImage = "https://live.staticflickr.com/65535/52327897449_5aa49da92c_o.png";
+      crucibleImage = "https://i.imgur.com/J31JMTq.png";
       crucibleColor = "#ff0037";
       crucibleTitle = "Competitivo";
-      crucibleThumbnail = "https://live.staticflickr.com/65535/52327844398_680ac5d28e_o.png";
+      crucibleThumbnail = "https://i.imgur.com/EiiEyq7.png";
       crucibleFooter = "Competitivo"
       players = numberOfPlayers(crucibleFooter)
       break;
     case "Osíris":
-      crucibleImage = "https://live.staticflickr.com/65535/52327897359_b54eccd8c4_o.png";
+      crucibleImage = "https://i.imgur.com/GOUZrH2.png";
       crucibleColor = "#ffb700";
       crucibleTitle = "Desafios de Osíris";
-      crucibleThumbnail = "https://live.staticflickr.com/65535/52328022755_b79af49163_o.png";
+      crucibleThumbnail = "https://i.imgur.com/PPPwMzP.png";
       crucibleFooter = "Osíris"
       players = numberOfPlayers(crucibleFooter)
       break;
     case "Bandeira":
-      crucibleImage = "https://live.staticflickr.com/65535/52326647212_323838d782_o.png";
+      crucibleImage = "https://i.imgur.com/pCBVTi3.png";
       crucibleColor = "#007036";
       crucibleTitle = "Bandeira de Ferro";
-      crucibleThumbnail = "https://live.staticflickr.com/65535/52328022750_0891ba1a16_o.png";
+      crucibleThumbnail = "https://i.imgur.com/fGedl0o.png";
       crucibleFooter = "Bandeira"
       players = numberOfPlayers(crucibleFooter)
       break;
     case "Privada":
-      crucibleImage = "https://live.staticflickr.com/65535/52326647127_a22e62e7a2_o.png";
+      crucibleImage = "https://i.imgur.com/DsEkNsr.png";
       crucibleColor = "#8400ff";
       crucibleTitle = "Partida Privada";
-      crucibleThumbnail = "https://live.staticflickr.com/65535/52327601666_059f67c51f_o.png";
+      crucibleThumbnail = "https://i.imgur.com/OK0Z2Jz.png";
       crucibleFooter = "Privada"
       players = numberOfPlayers(crucibleFooter)
       break;
@@ -246,7 +246,7 @@ const run = async (client, interaction) => {
 
 // https://github.com/discord/discord-api-docs/issues/2438 VERIFICAR ISSO AQUI
 module.exports = {
-  name: "abrir_crisol",
+  name: "criar_crisol",
   description: "Criar uma grade!",
   //perm: "MODERATE_MEMBERS",
   // https://discordjs.guide/interactions/slash-commands.html#option-types // Option-Types

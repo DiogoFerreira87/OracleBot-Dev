@@ -163,17 +163,17 @@ const run = async (client, interaction) => {
   let nightfallColor;
   switch (nightfall) {
     case "Anoitecer Normal":
-      nightfallImage = "https://live.staticflickr.com/65535/52328022305_f8678ff937_b.jpg";
+      nightfallImage = "https://i.imgur.com/sjFm0Md.png";
       nightfallColor = "#ff0000";
       nightfallTitle = "Anoitecer Normal";
       break;
     case "100k":
-      nightfallImage = "https://live.staticflickr.com/65535/52327601226_24c90211ed_b.jpg";
+      nightfallImage = "https://i.imgur.com/witwnCa.png";
       nightfallColor = "#93ae73";
       nightfallTitle = "Anoitecer 100k";
       break;
     case "GM":
-      nightfallImage = "https://live.staticflickr.com/65535/52326646562_fc08ea094a_b.jpg";
+      nightfallImage = "https://i.imgur.com/y22QAhu.png";
       nightfallColor = "#d2e5f1";
       nightfallTitle = "Anoitecer Grão-Mestre";
       break;
@@ -191,7 +191,7 @@ const run = async (client, interaction) => {
     //.setAuthor({ name: 'nightfall Oracles'});//, iconURL: 'https://i.imgur.com/GX7G6BM.png'})//, url: 'https://discord.js.org' })
     .setAuthor({ name: `${user}`, iconURL: `${avatar}` })
     .setDescription(gradeHeader)
-    .setThumbnail("https://live.staticflickr.com/65535/52327601186_122e3f4321_o.png")
+    .setThumbnail("https://i.imgur.com/bheK01a.png")
     .addFields(
       { name: "🎮 Jogadores (1/3)", value: `<@${userID}>` },
       { name: "👥 Reservas (0)", value: "Nenhum" }
@@ -202,7 +202,7 @@ const run = async (client, interaction) => {
   // React to the message
   // Orales role 961267518775918662
   // Test Role 965910989885296680
-  thread.send({content: "<@&965910989885296680>", embeds: [exampleEmbed] }).then((embedMessage) => {
+  thread.send({content: "<@&961267518775918662>", embeds: [exampleEmbed] }).then((embedMessage) => {
     embedMessage.react("☑️"), embedMessage.react("👥");
   });
 
@@ -215,7 +215,7 @@ const run = async (client, interaction) => {
 // https://github.com/discord/discord-api-docs/issues/2438 VERIFICAR ISSO AQUI
 
 module.exports = {
-  name: "abrir_anoitecer",
+  name: "criar_anoitecer",
   description: "Criar uma grade!",
   //perm: "MODERATE_MEMBERS",
   // https://discordjs.guide/interactions/slash-commands.html#option-types // Option-Types

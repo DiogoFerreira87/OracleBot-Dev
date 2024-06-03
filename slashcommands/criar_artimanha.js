@@ -24,12 +24,13 @@ const run = async (client, interaction) => {
           "❌ Erro: **Formato de data inválido** - Por favor digite **'Hoje'** ou uma data no formato (**dd/mm** ou **dd/mm/aaaa**)",
         ephemeral: true,
       });
-    } else {
-      dia = moment.tz(new Date(),"America/Sao_Paulo").format("YYYY-MM-DD[T]HH:mm:ss");
-      dia = moment(dia).format("DD/MM/YYYY") + " " + hora;
+    } else{
+      dia = new Date(); // Today
+      dia = moment(dia,"DD/MM/YYYY").format("DD/MM/YYYY") + " " + hora;
     }
-  } else {
-    dia = moment(dia).format("DD/MM/YYYY") + " " + hora; // If it is all good, format the correct date.
+  }
+  else{
+    dia = moment(dia,"DD/MM/YYYY").format("DD/MM/YYYY") + " " + hora; // If it is all good, format the correct date.
   }
 
   // Verificar config hora
@@ -64,7 +65,6 @@ const run = async (client, interaction) => {
       // Thread formatted hour
       if (hora.includes(":00")) {
         newHora = `${hora.replace(":", "h").substring(0, hora.length -2)}`;
-
       } else {
         newHora = `${hora.replace(":", "h")}`;
       }
@@ -155,7 +155,7 @@ const run = async (client, interaction) => {
     autoArchiveDuration: 1440,
   });
 
-  let gambitImage = "https://live.staticflickr.com/65535/52328022545_641fb7ebc0_b.jpg";
+  let gambitImage = "https://i.imgur.com/Q2VsuZq.png";
   let gambitColor = "#004512";
   let gambitTitle = "Artimanha";
 
@@ -171,7 +171,7 @@ const run = async (client, interaction) => {
     //.setAuthor({ name: 'gambit Oracles'});//, iconURL: 'https://i.imgur.com/GX7G6BM.png'})//, url: 'https://discord.js.org' })
     .setAuthor({name: `${user}`,iconURL: `${avatar}`})
     .setDescription(gradeHeader)
-    .setThumbnail("https://live.staticflickr.com/65535/52328022535_fb28ef74f6_o.png")
+    .setThumbnail("https://i.imgur.com/e921A2e.png")
     .addFields(
       { name: "🎮 Jogadores (1/3)", value: `<@${userID}>` },
       { name: "👥 Reservas (0)", value: "Nenhum" }
@@ -192,7 +192,7 @@ const run = async (client, interaction) => {
 };
 // https://github.com/discord/discord-api-docs/issues/2438 VERIFICAR ISSO AQUI
 module.exports = {
-  name: "abrir_artimanha",
+  name: "criar_artimanha",
   description: "Criar uma grade!",
   //perm: "MODERATE_MEMBERS",
   // https://discordjs.guide/interactions/slash-commands.html#option-types // Option-Types

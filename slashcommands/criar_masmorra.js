@@ -10,6 +10,8 @@ const Grid = require("../models/Grid");
 //----------------------------------------------
 
 const dungeon = [
+  { name: "Ruína da Senhora da Guerra", value: "Ruína" },
+  { name: "Fantasmas das Profundezas", value: "Profundezas" },
   { name: "Pináculo da Sentinela", value: "Sentinela" },
   { name: "Domínio da Avareza", value: "Avareza" },
   { name: "Profecia", value: "Profecia" },
@@ -34,12 +36,13 @@ const run = async (client, interaction) => {
           "❌ Erro: **Formato de data inválido** - Por favor digite **'Hoje'** ou uma data no formato (**dd/mm** ou **dd/mm/aaaa**)",
           ephemeral: true,
     });
-    } else {
-      dia = moment.tz(new Date(),"America/Sao_Paulo").format("YYYY-MM-DD[T]HH:mm:ss");
-      dia = moment(dia).format("DD/MM/YYYY") + " " + hora;
+    } else{
+      dia = new Date(); // Today
+      dia = moment(dia,"DD/MM/YYYY").format("DD/MM/YYYY") + " " + hora;
     }
-  } else {
-    dia = moment(dia).format("DD/MM/YYYY") + " " + hora; // If it is all good, format the correct date.
+  }
+  else{
+    dia = moment(dia,"DD/MM/YYYY").format("DD/MM/YYYY") + " " + hora; // If it is all good, format the correct date.
   }
 
   // Verificar config hora
@@ -74,7 +77,6 @@ const run = async (client, interaction) => {
       // Thread formatted hour
       if (hora.includes(":00")) {
         newHora = `${hora.replace(":", "h").substring(0, hora.length -2)}`;
-
       } else {
         newHora = `${hora.replace(":", "h")}`;
       }
@@ -168,46 +170,60 @@ const run = async (client, interaction) => {
   let dungeonImage;
   let dungeonColor;
   switch (dungeon) {
+    case "Ruína":
+      dungeonImage = "https://i.imgur.com/BgxFl1q.png";
+      dungeonColor = "#d2debb";
+      dungeonTitle = "Ruína da Senhora da Guerra";
+      dungeonThumbnail = "https://i.imgur.com/1neDdxy.png";
+      break;
+
+    case "Profundezas":
+      dungeonImage = "https://i.imgur.com/L2cbIRG.png";
+      dungeonColor = "#007d60";
+      dungeonTitle = "Fantasmas das Profundezas";
+      dungeonThumbnail = "https://i.imgur.com/QYIJnZM.png";
+      break;
+
     case "Sentinela":
-      dungeonImage = "https://live.staticflickr.com/65535/52577701954_7d407c133a_o.png";
+      dungeonImage = "https://i.imgur.com/qhIGjhp.png";
       dungeonColor = "#48a6ae";
       dungeonTitle = "Pináculo da Sentinela";
-      dungeonThumbnail = "https://live.staticflickr.com/65535/52577869510_aace59b938_o.png";
+      dungeonThumbnail = "https://i.imgur.com/GNrPD03.png";
       break;
 
     case "Avareza":
-      dungeonImage = "https://live.staticflickr.com/65535/52328023315_988066a646_o.png";
+      dungeonImage = "https://i.imgur.com/97coBjv.png";
       dungeonColor = "#48a6ae";
       dungeonTitle = "Domínio da Avareza";
-      dungeonThumbnail = "https://live.staticflickr.com/65535/52328023310_8017890567_o.png";
+      dungeonThumbnail = "https://i.imgur.com/dGnN0FL.png";
       break;
 
     case "Profecia":
-      dungeonImage = "https://live.staticflickr.com/65535/52327844898_fbd4d60bee_o.png";
+      dungeonImage = "https://i.imgur.com/MuapoLv.png";
       dungeonColor = "#cc3178";
       dungeonTitle = "Profecia";
-      dungeonThumbnail = "https://live.staticflickr.com/65535/52327844893_c9827a8ed0_o.png";
+      dungeonThumbnail = "https://i.imgur.com/1pbBWdk.png";
       break;
 
     case "Fosso":
-      dungeonImage = "https://live.staticflickr.com/65535/52327897914_4147c43486_o.png";
+      dungeonImage = "https://i.imgur.com/hIOThZf.png";
       dungeonColor = "#f28c0c";
       dungeonTitle = "Fosso da Heresia";
-      dungeonThumbnail = "https://live.staticflickr.com/65535/52327897909_f41a85cbfe_o.png";
+      dungeonThumbnail = "https://i.imgur.com/MeH1k4o.png";
       break;
 
     case "Trono":
-      dungeonImage = "https://live.staticflickr.com/65535/52327602096_cf54e77f99_o.png";
+      dungeonImage = "https://i.imgur.com/qVCGSgC.png";
       dungeonColor = "#d2debb";
       dungeonTitle = "O Trono Estilhaçado";
-      dungeonThumbnail = "https://live.staticflickr.com/65535/52326647542_e1c48810ec_o.png";
+      dungeonThumbnail = "https://i.imgur.com/7C2EnSR.png";
       break;
       
     case "Dualidade":
-      dungeonImage = "https://live.staticflickr.com/65535/52327897974_5ced1248c8_o.png";
+      dungeonImage = "https://i.imgur.com/exs0CZj.png";
       dungeonColor = "#ff5900";
       dungeonTitle = "Dualidade";
-      dungeonThumbnail = "https://live.staticflickr.com/65535/52327897934_eaf1e75c1a_o.png";
+      dungeonThumbnail = "https://i.imgur.com/b71U9kl.png";
       break;
   }
 
@@ -244,7 +260,7 @@ const run = async (client, interaction) => {
 };
 // https://github.com/discord/discord-api-docs/issues/2438 VERIFICAR ISSO AQUI
 module.exports = {
-  name: "abrir_masmorra",
+  name: "criar_masmorra",
   description: "Criar uma grade!",
   //perm: "MODERATE_MEMBERS",
   // https://discordjs.guide/interactions/slash-commands.html#option-types // Option-Types
