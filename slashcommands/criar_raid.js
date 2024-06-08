@@ -10,7 +10,7 @@ const Grid = require("../models/Grid");
 //----------------------------------------------
 
 const raids = [
-  //{ name: "NOVA RAID", value: "NOVA RAID" },
+  { name: "Limiar da Salvação", value: "Limiar" },
   { name: "Panteão", value: "Panteão" },
   { name: "O Fim de Crota - MESTRE", value: "Crota Mestre" },
   { name: "O Fim de Crota", value: "Crota" },
@@ -173,11 +173,11 @@ const run = async (client, interaction) => {
   let raidImage;
   let raidColor;
   switch (raid) {
-    // case "NOVA RAID":
-    //   raidImage = "https://i.imgur.com/viX0Ivl.png";
-    //   raidColor = "#025926";
-    //   raidTitle = "O fim de Crota - Mestre";
-    //   break;
+    case "Limiar":
+      raidImage = "https://i.imgur.com/NOSaFTi.png";
+      raidColor = "#FF5BBB";
+      raidTitle = "Limiar da Salvação";
+      break;
     case "Panteão":
       raidImage = "https://i.imgur.com/heUSeVk.png";
       raidColor = "#590202";
